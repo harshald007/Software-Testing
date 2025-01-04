@@ -7,6 +7,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,6 +19,20 @@ import java.util.List;
 import java.util.Set;
 
 public class GenericUtility {
+    //assignment for remaining actions methods
+    public void scrollByActions(WebDriver driver, WebElement ele) {
+        Actions act = new Actions(driver);
+        act.scrollToElement(ele).perform();
+    }
+    public void sendKeysByActions(WebDriver driver, WebElement ele, String value) {
+        Actions act = new Actions(driver);
+        act.sendKeys(ele, value).perform();
+    }
+    public void clickByActions(WebDriver driver, WebElement ele) {
+        Actions act = new Actions(driver);
+        act.click(ele).perform();
+    }
+
     public List<String> getAllTextFromList(List<WebElement> allEles) {
         List<String> allText = new ArrayList<String>();
         for(int i=0; i<allEles.size(); i++) {
@@ -81,7 +96,6 @@ public class GenericUtility {
         WebDriverWait wt = new WebDriverWait(driver, Duration.ofSeconds(time));
         wt.until(ExpectedConditions.visibilityOfElementLocated(obj));
     }
-
     public void waitForVisibilityByObj(WebDriver driver, int time, String type, String expression) {
         WebDriverWait wt = new WebDriverWait(driver, Duration.ofSeconds(time));
         if(type.equalsIgnoreCase("id")) {
@@ -110,10 +124,9 @@ public class GenericUtility {
             System.out.println("Invalid Locator type...!!!");
         }
     }
-
-    public void waitForNumberOfWindows(WebDriver driver, int time, int numOfWindows) {
-        WebDriverWait wt = new WebDriverWait(driver, Duration.ofSeconds(time));
-        wt.until(ExpectedConditions.numberOfWindowsToBe(numOfWindows));
+    public void waitForNumberOfWindows(WebDriver driver, int time, int numberofwindows) {
+        WebDriverWait wt = new WebDriverWait(driver,Duration.ofSeconds(time));
+        wt.until(ExpectedConditions.numberOfWindowsToBe(numberofwindows));
     }
     //block advertisements
     public void blockAd(WebDriver driver) {
@@ -138,57 +151,10 @@ public class GenericUtility {
             //driver.manage().window().maximize();
             //OR
             ChromeOptions  options = new ChromeOptions();
-            options.addArguments("--start-maximized");
+            options.addArguments("--start-minimize");
             options.addArguments("--disable-notifications");
-            options.addExtensions(new File("./AdBlocker/AdBlocker Ultimate.crx"));
-            //options.addArguments("--headless");
-            driver = new ChromeDriver(options);
-
-        } else if(bName.equalsIgnoreCase("edge")) {
-            //WebDriver driver = new EdgeDriver();
-            //driver.manage().window().maximize();
-            //OR
-            EdgeOptions  options = new EdgeOptions();
-            options.addArguments("--start-maximized");
-            options.addArguments("--start-maximized");
-            options.addArguments("--disable-notifications");
-            options.addArguments("--headless");
-            driver = new EdgeDriver(options);
-
-        } else if(bName.equalsIgnoreCase("ff") || bName.equalsIgnoreCase("firefox")) {
-            //WebDriver driver = new FirefoxDriver();
-            //driver.manage().window().maximize();
-            //OR
-
-            FirefoxOptions  options = new FirefoxOptions();
-            options.addArguments("--start-maximized");
-            options.addArguments("--start-maximized");
-            options.addArguments("--disable-notifications");
-            options.addArguments("--headless");
-            driver = new FirefoxDriver(options);
-
-        } else {
-            System.out.println("Invalid Browser name...!!!");
-        }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        waitForNumberOfWindows(driver,  10, 2);
-        blockAd(driver);
-        driver.get(url);
-        blockAd(driver);
-
-        return driver;
-    }
-    public void startUp_old(String bName) {
-        WebDriver driver = null;
-        if(bName.equalsIgnoreCase("ch") || bName.equalsIgnoreCase("chrome")) {
-            //WebDriver driver = new ChromeDriver();
-            //driver.manage().window().maximize();
-            //OR
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            options.addArguments("--disable-notifications");
-            //options.addArguments("--headless");
-
+            options.addExtensions(new File("AdBlocker/AdBlocker Ultimate.crx"));
+//            options.addArguments("--headless");
             driver = new ChromeDriver(options);
 
         } else if(bName.equalsIgnoreCase("edge")) {
@@ -217,6 +183,69 @@ public class GenericUtility {
         } else {
             System.out.println("Invalid Browser name...!!!");
         }
+        assert driver != null;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForNumberOfWindows(driver,  10, 2);
+        blockAd(driver);
+        driver.get(url);
+
+        return driver;
+    }
+    public WebElement waitForElementVisibility(WebDriver driver, By locator, int timeoutSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void enterText(WebDriver driver, By locator, String text) {
+        WebElement element = waitForElementVisibility(driver, locator, 10);
+        element.sendKeys(text);
+    }
+
+    public void clickElement(WebDriver driver, By locator) {
+        WebElement element = waitForElementVisibility(driver, locator, 10);
+        element.click();
+    }
+
+
+    public void startUp_old(String bName) {
+        WebDriver driver = null;
+        if(bName.equalsIgnoreCase("ch") || bName.equalsIgnoreCase("chrome")) {
+            //WebDriver driver = new ChromeDriver();
+            //driver.manage().window().maximize();
+            //OR
+            ChromeOptions  options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-notifications");
+            //options.addArguments("--headless");
+
+            driver = new ChromeDriver(options);
+
+        } else if(bName.equalsIgnoreCase("edge")) {
+            //WebDriver driver = new EdgeDriver();
+            //driver.manage().window().maximize();
+            //OR
+            EdgeOptions  options = new EdgeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--headless");
+            driver = new EdgeDriver(options);
+
+        } else if(bName.equalsIgnoreCase("ff") || bName.equalsIgnoreCase("firefox")) {
+            //WebDriver driver = new FirefoxDriver();
+            //driver.manage().window().maximize();
+            //OR
+
+            FirefoxOptions  options = new FirefoxOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--headless");
+            driver = new FirefoxDriver(options);
+
+        } else {
+            System.out.println("Invalid Browser name...!!!");
+        }
         //driver.manage().window().maximize();
         //OR
         //driver.manage().window().fullscreen();      //full screen
@@ -226,5 +255,6 @@ public class GenericUtility {
 
         driver.get("https://www.google.com");
 
+
     }
-}
+    }

@@ -1,0 +1,5 @@
+WinWaitActive("Open","",10)
+Sleep(2000)
+Send("D:\Softwae Testing ccjuly2024\selenium\actitime-automation\FileUploads\UploadData.txt")
+Sleep(2000)
+Send("{ENTER}")

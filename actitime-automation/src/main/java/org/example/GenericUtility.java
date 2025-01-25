@@ -124,6 +124,20 @@ public class GenericUtility {
             System.out.println("Invalid Locator type...!!!");
         }
     }
+    public void waitForinvisbilityByType(WebDriver driver,int time,String type,String expression){
+        WebDriverWait iwt = new WebDriverWait(driver,Duration.ofSeconds(time));
+        if (type.equalsIgnoreCase("id")){
+            iwt.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id(expression))));
+        }else if (type.equalsIgnoreCase("css")){
+            iwt.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(expression))));
+        } else if (type.equalsIgnoreCase("xpath")) {
+            iwt.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(expression))));
+        } else if (type.equalsIgnoreCase("class")) {
+            iwt.until(ExpectedConditions.invisibilityOf(driver.findElement(By.className(expression))));
+        }else {
+            System.out.println("Invalid locator");
+        }
+    }
     public void waitForNumberOfWindows(WebDriver driver, int time, int numberofwindows) {
         WebDriverWait wt = new WebDriverWait(driver,Duration.ofSeconds(time));
         wt.until(ExpectedConditions.numberOfWindowsToBe(numberofwindows));
@@ -257,4 +271,4 @@ public class GenericUtility {
 
 
     }
-    }
+}

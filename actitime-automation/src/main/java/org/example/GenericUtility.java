@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 public class GenericUtility {
-    //assignment for remaining actions methods
+        //assignment for remaining actions methods
     public void scrollByActions(WebDriver driver, WebElement ele) {
         Actions act = new Actions(driver);
         act.scrollToElement(ele).perform();
@@ -75,6 +75,11 @@ public class GenericUtility {
         } catch(Exception e) {
             return false;
         }
+    }
+
+    public void test(WebDriver driver, int time, By obj) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(obj)));
     }
     public void waitForURLContains(WebDriver driver, int time, String partialURL) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));

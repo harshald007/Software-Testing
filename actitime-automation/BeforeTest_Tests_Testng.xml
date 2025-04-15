@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="QA ENV Test Cases">
+        <classes>
+            <class name="com.actitime_automation.jan_04_2025.ReportsTC"/>
+            <class name="com.actitime_automation.jan_04_2025.InstagramTC"/>
+            <class name="com.actitime_automation.jan_04_2025.UserEx2"/>
+            <class name="com.actitime_automation.jan_04_2025.AccountsEx2"/>
+            <class name="com.actitime_automation.jan_04_2025.WhatsappsTC"/>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="STAGE ENV Test Cases">
+        <classes>
+            <class name="com.actitime_automation.jan_04_2025.InstagramTC"/>
+            <class name="com.actitime_automation.jan_04_2025.WhatsappsTC"/>
+        </classes>
+    </test>
+</suite>

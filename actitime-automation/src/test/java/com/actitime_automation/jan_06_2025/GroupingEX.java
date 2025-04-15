@@ -1,9 +1,9 @@
 package com.actitime_automation.jan_06_2025;
 
+ 
 import org.testng.annotations.Test;
 
-public class ReportsEx1 {
-
+public class GroupingEX {
     @Test(groups={"smoke", "regression", "integration"})
     public void UpdateCustomer() {
         System.out.println("Capital Update customer TC");
@@ -11,8 +11,6 @@ public class ReportsEx1 {
     @Test(groups={"smoke", "regression"})
     public void CreateCustomer() {
         System.out.println("Capital Create customer TC");
-//        int div = 10/0;
-//        System.out.println("division : " + div);
     }
     @Test(groups={"regression", "integration"})
     public void DeleteCustomer() {

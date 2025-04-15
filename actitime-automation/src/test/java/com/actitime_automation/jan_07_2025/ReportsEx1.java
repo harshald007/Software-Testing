@@ -1,39 +1,46 @@
-package com.actitime_automation.jan_06_2025;
+package com.actitime_automation.jan_07_2025;
 
 import org.testng.annotations.Test;
 
 public class ReportsEx1 {
 
-    @Test(groups={"smoke", "regression", "integration"})
+    @Test
     public void UpdateCustomer() {
         System.out.println("Capital Update customer TC");
     }
-    @Test(groups={"smoke", "regression"})
+
+    @Test
     public void CreateCustomer() {
         System.out.println("Capital Create customer TC");
-//        int div = 10/0;
-//        System.out.println("division : " + div);
+        int div = 10 / 0;
+        System.out.println("division : " + div);
     }
-    @Test(groups={"regression", "integration"})
+
+    @Test
     public void DeleteCustomer() {
         System.out.println("Capital Delete customer TC");
     }
-    @Test(groups={"smoke", "integration"})
+
+    @Test
     public void updateCustomer() {
         System.out.println("small update customer TC");
     }
-    @Test(groups={"smoke"})
+
+    @Test
     public void createCustomer() {
         System.out.println("small create customer TC");
     }
-    @Test(groups={"regression"})
+
+    @Test
     public void deleteCustomer() {
         System.out.println("small delete customer TC");
     }
-    @Test(groups={"integration"})
+
+    @Test
     public void login() {
         System.out.println("Login");
     }
+
     @Test
     public void logout() {
         System.out.println("Logout");

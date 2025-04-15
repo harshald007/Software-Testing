@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <parameter name="username" value="admin"></parameter>
+    <parameter name="password" value="manager"></parameter>
+    <test verbose="2" preserve-order="true"
+          name="ParametersEx.java">
+        <classes>
+            <class name="com.actitime_automation.jan_07_2025.ParametersEx"> </class>
+        </classes>
+    </test>
+</suite>

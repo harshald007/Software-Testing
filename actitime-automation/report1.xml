@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="QA-testing">
+        <classes>
+            <class name="com.actitime_automation.jan_06_2025.ReportsEx1"> </class>
+            <class name="com.actitime_automation.jan_06_2025.ReportsEx2"> </class>
+        </classes>
+    </test>
+</suite>
